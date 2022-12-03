@@ -15,38 +15,40 @@ import java.util.Optional;
 
 @RestController
 
-
 @RequestMapping("api/employees")
-public class
-EmployeeController {
+public class EmployeeController {
     private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
     @Autowired
     EmployeeService employeeService;
 
     @PostMapping("/create")
-    public ResponseEntity<Employee> save(@RequestBody Employee employee){
+    public ResponseEntity<Employee> save(@RequestBody Employee employee) {
         logger.info("Creating a employee");
-        return new ResponseEntity<Employee>(employeeService.save(employee),HttpStatus.CREATED);
+        return new ResponseEntity<Employee>(employeeService.save(employee), HttpStatus.CREATED);
     }
+
     @GetMapping
-    public List<Employee>getAll(){
+    public List<Employee> getAll() {
         logger.info("getting All employees");
         return employeeService.getAll();
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Employee>> getById(@PathVariable("id") Integer id){
-        logger.info("getting the employee, Id:"+id);
+    public ResponseEntity<Optional<Employee>> getById(@PathVariable("id") Integer id) {
+        logger.info("getting the employee, Id:" + id);
         return ResponseEntity.ok().body(employeeService.findById(id));
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Employee>update(@PathVariable("id") Integer id, @RequestBody Employee employee){
-        logger.info("updating the employee, Id:"+id);
-        return new ResponseEntity<Employee>(employeeService.update(employee,id),HttpStatus.OK);
+    public ResponseEntity<Employee> update(@PathVariable("id") Integer id, @RequestBody Employee employee) {
+        logger.info("updating the employee, Id:" + id);
+        return new ResponseEntity<Employee>(employeeService.update(employee, id), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<String>delete(@PathVariable("id") Integer id){
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
         employeeService.delete(id);
-        logger.info("deleting the employee, Id:"+id);
-        return new ResponseEntity<String>("Employee deleted Successfully",HttpStatus.OK);
+        logger.info("deleting the employee, Id:" + id);
+        return new ResponseEntity<String>("Employee deleted Successfully", HttpStatus.OK);
     }
 }
