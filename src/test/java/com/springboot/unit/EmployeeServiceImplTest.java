@@ -55,10 +55,10 @@ public class EmployeeServiceImplTest {
         doReturn(Optional.empty()).when(employeeRepository).findById(1);
 
         // Execute the service call
-        Optional<Employee> returnedWidget = employeeRepository.findById(1);
+        Optional<Employee> emp = employeeRepository.findById(1);
 
         // Assert the response
-        assertFalse(returnedWidget.isPresent(), "Widget should not be found");
+        assertFalse(emp.isPresent(), "Employee should not be found");
     }
 
     @Test
